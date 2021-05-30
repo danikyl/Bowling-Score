@@ -1,18 +1,14 @@
-package com.technology.daniel.javachallenge.service.parser.implementation;
+package com.technology.daniel.javachallenge.service.implementation;
 
 import com.technology.daniel.javachallenge.domain.model.Frame;
 import com.technology.daniel.javachallenge.exception.FileWrongFormatException;
 import com.technology.daniel.javachallenge.exception.NotFoundException;
-import com.technology.daniel.javachallenge.service.parser.FileParser;
+import com.technology.daniel.javachallenge.service.FileParser;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.stream.Collectors;
+import java.util.*;
 
 @Service
 public class FileParserImpl implements FileParser {
@@ -33,32 +29,38 @@ public class FileParserImpl implements FileParser {
     private List<Frame> getFrames(Scanner reader) {
         try {
             List<Frame> matchFrames = new ArrayList<>();
+            Map<String, Integer> playersFrameCount = new HashMap<>();
             while (reader.hasNextLine()) {
-                Frame newFrame = Frame.builder().build();
+                Frame newFrame = Frame.builder().isLastFrame(false).build();
 
-                String row = reader.nextLine();
-                String[] ballPlayInfo = row.split("\t");
-
-                String player = ballPlayInfo[0];
-                newFrame.setPlayerName(player);
 
                 //Get first play of frame
-                Integer firstPinFalls = convertAndValidatePinFalls(ballPlayInfo[1]);
+                Integer firstPinFalls = getNextRecordFromFile(reader, newFrame);
                 newFrame.setPinFallsFirstRound(firstPinFalls);
-                //STRIKE CASE
-                if (firstPinFalls == 10) {
-                    newFrame.setIsStrike(true);
-                    newFrame.setIsSpare(false);
-                    newFrame.setPinFallsSecondRound(0);
+
+                //Check if player is already present on counter map
+                if (playersFrameCount.get(newFrame.getPlayerName()) != null) {
+                    playersFrameCount.put(newFrame.getPlayerName(), playersFrameCount.get(newFrame.getPlayerName()) + 1);
                 } else {
-                    newFrame.setIsStrike(false);
+                    playersFrameCount.put(newFrame.getPlayerName(), 1);
+                }
+
+
+                //STRIKE CASE
+                if (firstPinFalls != 10 || playersFrameCount.get(newFrame.getPlayerName()) == 10) {
                     //Get second play of frame
-                    row = reader.nextLine();
-                    ballPlayInfo = row.split("\t");
-                    validatePlayerNameSecondPlay(newFrame, ballPlayInfo[0]);
-                    Integer secondPinFalls = convertAndValidatePinFalls(ballPlayInfo[1]);
+                    Integer secondPinFalls = getNextRecordFromFile(reader, newFrame);
                     newFrame.setPinFallsSecondRound(secondPinFalls);
-                    newFrame.setIsSpare(isFrameSpare(newFrame));
+                }
+
+                //CASE OF PLAYER'S LAST FRAME
+                if (playersFrameCount.get(newFrame.getPlayerName()) == 10) {
+                    newFrame.setIsLastFrame(true);
+                    if (isFrameSpare(newFrame) || isFrameStrike(newFrame)) {
+                        //Get third play of frame
+                        Integer thirdPinFalls = getNextRecordFromFile(reader, newFrame);
+                        newFrame.setPinFallsThirdRound(thirdPinFalls);
+                    }
                 }
 
                 matchFrames.add(newFrame);
@@ -71,6 +73,16 @@ public class FileParserImpl implements FileParser {
         }
     }
 
+    private Integer getNextRecordFromFile(Scanner reader, Frame newFrame) {
+        String row;
+        String[] ballPlayInfo;
+        row = reader.nextLine();
+        ballPlayInfo = row.split("\t");
+        validatePlayerName(newFrame, ballPlayInfo[0]);
+        Integer pinFalls = convertAndValidatePinFalls(ballPlayInfo[1]);
+        return pinFalls;
+    }
+
     private Integer convertAndValidatePinFalls(String pinFallsString) {
         if (pinFallsString.equals("F")) pinFallsString = "0";
         Integer pinFallsInteger = Integer.parseInt(pinFallsString);
@@ -81,17 +93,23 @@ public class FileParserImpl implements FileParser {
     }
 
     private Boolean isFrameSpare(Frame frame) {
-        if (frame.getPinFallsFirstRound() + frame.getPinFallsSecondRound() > 10) {
-            throw new FileWrongFormatException("Provided frame is invalid. Total pin falls can not be greater than 10");
-        }
         if (frame.getPinFallsFirstRound() + frame.getPinFallsSecondRound() == 10) {
             return true;
         }
         return false;
     }
 
-    private void validatePlayerNameSecondPlay(Frame frame, String secondPlayName) {
-        if (!frame.getPlayerName().equals(secondPlayName))
+    private Boolean isFrameStrike(Frame frame) {
+        if (frame.getPinFallsFirstRound() == 10) {
+            return true;
+        }
+        return false;
+    }
+
+    private void validatePlayerName(Frame frame, String playerName) {
+        if (frame.getPlayerName() == null) {
+            frame.setPlayerName(playerName);
+        } else if (!frame.getPlayerName().equals(playerName))
             throw new FileWrongFormatException("Player name of first and second play doesn't match");
     }
 }
