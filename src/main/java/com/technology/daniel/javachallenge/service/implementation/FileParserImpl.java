@@ -4,7 +4,7 @@ import com.technology.daniel.javachallenge.domain.model.Frame;
 import com.technology.daniel.javachallenge.exception.FileWrongFormatException;
 import com.technology.daniel.javachallenge.exception.NotFoundException;
 import com.technology.daniel.javachallenge.service.parser.FileParser;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,15 +14,15 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class FileParserImpl implements FileParser {
 
     @Override
-    public Map<String, List<Frame>> loadMatchFramesFromFile(String filename) {
+    public List<Frame> loadMatchFramesFromFile(String filename) {
         try {
             File fileToRead = new File(filename);
             Scanner myReader = new Scanner(fileToRead);
-            Map<String, List<Frame>> matchFrames = getFrames(myReader);
+            List<Frame> matchFrames = getFrames(myReader);
             myReader.close();
             return matchFrames;
         } catch (FileNotFoundException e) {
@@ -30,13 +30,7 @@ public class FileParserImpl implements FileParser {
         }
     }
 
-    private Map<String, List<Frame>> divideMatchFramesPerPlayer(List<Frame> matchFrames) {
-        Map<String, List<Frame>> framesMap = matchFrames.stream().collect(Collectors.groupingBy(frame -> frame.getPlayerName()));
-        ;
-        return framesMap;
-    }
-
-    private Map<String, List<Frame>> getFrames(Scanner reader) {
+    private List<Frame> getFrames(Scanner reader) {
         try {
             List<Frame> matchFrames = new ArrayList<>();
             while (reader.hasNextLine()) {
@@ -70,7 +64,7 @@ public class FileParserImpl implements FileParser {
                 matchFrames.add(newFrame);
             }
 
-            return divideMatchFramesPerPlayer(matchFrames);
+            return matchFrames;
 
         } catch (Exception e) {
             throw new FileWrongFormatException("File format is not supported.");

@@ -1,4 +1,4 @@
-package com.technology.daniel.javachallenge.show_runner;
+package com.technology.daniel.javachallenge.service;
 
 public interface ShowRunner {
     void run(String... args);

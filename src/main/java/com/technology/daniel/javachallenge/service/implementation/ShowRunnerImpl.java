@@ -4,17 +4,16 @@ import com.technology.daniel.javachallenge.JavaChallengeApplication;
 import com.technology.daniel.javachallenge.domain.model.Frame;
 import com.technology.daniel.javachallenge.exception.FileWrongFormatException;
 import com.technology.daniel.javachallenge.exception.NotFoundException;
-import com.technology.daniel.javachallenge.service.parser.FileParser;
+import com.technology.daniel.javachallenge.service.FileParser;
 import com.technology.daniel.javachallenge.show_runner.ShowRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
-@Component
+@Service
 public class ShowRunnerImpl implements ShowRunner {
 
     private static Logger LOG = LoggerFactory
@@ -22,6 +21,8 @@ public class ShowRunnerImpl implements ShowRunner {
 
     @Autowired
     FileParser fileParser;
+
+
 
     @Override
     public void run(String... args) {
@@ -42,8 +43,10 @@ public class ShowRunnerImpl implements ShowRunner {
              * *******************************************************************************************
              * *******************************************************************************************
              */
-            Map<String, List<Frame>> frames = fileParser.loadMatchFramesFromFile(filename);
-            System.out.println("TESTE");
+            List<Frame> frames = fileParser.loadMatchFramesFromFile(filename);
+
+
+
         } catch (NotFoundException e) {
             LOG.error(e.getMessage());
         } catch (FileWrongFormatException e) {

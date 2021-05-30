@@ -16,6 +16,8 @@ public class Frame {
 
     private Integer pinFallsSecondRound;
 
+    private Integer pinFallsThirdRound;
+
     private Boolean isStrike;
 
     private Boolean isSpare;

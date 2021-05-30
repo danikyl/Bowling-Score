@@ -1,6 +1,6 @@
 package com.technology.daniel.javachallenge;
 
-import com.technology.daniel.javachallenge.show_runner.ShowRunner;
+import com.technology.daniel.javachallenge.service.ShowRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
