@@ -7,4 +7,6 @@ import java.util.Map;
 
 public interface ScoreService {
     Map<String, List<Frame>> divideMatchFramesPerPlayer(List<Frame> matchFrames);
+
+    Map<String, List<Frame>> generateScore(Map<String, List<Frame>> frameMap);
 }

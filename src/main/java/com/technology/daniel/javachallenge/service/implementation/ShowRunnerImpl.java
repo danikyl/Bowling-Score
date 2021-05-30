@@ -51,7 +51,7 @@ public class ShowRunnerImpl implements ShowRunner {
 
             Map<String, List<Frame>> framesByPlayer = scoreService.divideMatchFramesPerPlayer(frames);
 
-            System.out.println("TESTING");
+            scoreService.generateScore(framesByPlayer);
 
 
         } catch (NotFoundException e) {
