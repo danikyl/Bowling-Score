@@ -1,7 +1,6 @@
 package com.technology.daniel.javachallenge.service.parser.implementation;
 
 import com.technology.daniel.javachallenge.domain.model.Frame;
-import com.technology.daniel.javachallenge.domain.model.Player;
 import com.technology.daniel.javachallenge.exception.FileWrongFormatException;
 import com.technology.daniel.javachallenge.exception.NotFoundException;
 import com.technology.daniel.javachallenge.service.parser.FileParser;
@@ -10,17 +9,20 @@ import org.springframework.stereotype.Component;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 @Component
 public class FileParserImpl implements FileParser {
 
     @Override
-    public ArrayList<Frame> loadMatchFramesFromFile(String filename) {
+    public Map<String, List<Frame>> loadMatchFramesFromFile(String filename) {
         try {
             File fileToRead = new File(filename);
             Scanner myReader = new Scanner(fileToRead);
-            ArrayList<Frame> matchFrames = getFrames(myReader);
+            Map<String, List<Frame>> matchFrames = getFrames(myReader);
             myReader.close();
             return matchFrames;
         } catch (FileNotFoundException e) {
@@ -28,17 +30,23 @@ public class FileParserImpl implements FileParser {
         }
     }
 
-    private ArrayList<Frame> getFrames(Scanner reader) {
+    private Map<String, List<Frame>> divideMatchFramesPerPlayer(List<Frame> matchFrames) {
+        Map<String, List<Frame>> framesMap = matchFrames.stream().collect(Collectors.groupingBy(frame -> frame.getPlayerName()));
+        ;
+        return framesMap;
+    }
+
+    private Map<String, List<Frame>> getFrames(Scanner reader) {
         try {
-            ArrayList<Frame> matchFrames = new ArrayList<>();
+            List<Frame> matchFrames = new ArrayList<>();
             while (reader.hasNextLine()) {
                 Frame newFrame = Frame.builder().build();
 
                 String row = reader.nextLine();
                 String[] ballPlayInfo = row.split("\t");
 
-                Player player = Player.builder().name(ballPlayInfo[0]).build();
-                newFrame.setPlayer(player);
+                String player = ballPlayInfo[0];
+                newFrame.setPlayerName(player);
 
                 //Get first play of frame
                 Integer firstPinFalls = convertAndValidatePinFalls(ballPlayInfo[1]);
@@ -62,7 +70,7 @@ public class FileParserImpl implements FileParser {
                 matchFrames.add(newFrame);
             }
 
-            return matchFrames;
+            return divideMatchFramesPerPlayer(matchFrames);
 
         } catch (Exception e) {
             throw new FileWrongFormatException("File format is not supported.");
@@ -77,8 +85,9 @@ public class FileParserImpl implements FileParser {
         }
         return pinFallsInteger;
     }
+
     private Boolean isFrameSpare(Frame frame) {
-        if(frame.getPinFallsFirstRound() + frame.getPinFallsSecondRound() > 10) {
+        if (frame.getPinFallsFirstRound() + frame.getPinFallsSecondRound() > 10) {
             throw new FileWrongFormatException("Provided frame is invalid. Total pin falls can not be greater than 10");
         }
         if (frame.getPinFallsFirstRound() + frame.getPinFallsSecondRound() == 10) {
@@ -86,7 +95,9 @@ public class FileParserImpl implements FileParser {
         }
         return false;
     }
+
     private void validatePlayerNameSecondPlay(Frame frame, String secondPlayName) {
-        if (!frame.getPlayer().getName().equals(secondPlayName)) throw new FileWrongFormatException("Player name of first and second play doesn't match");
+        if (!frame.getPlayerName().equals(secondPlayName))
+            throw new FileWrongFormatException("Player name of first and second play doesn't match");
     }
 }

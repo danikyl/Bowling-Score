@@ -11,7 +11,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class ShowRunnerImpl implements ShowRunner {
@@ -34,10 +35,18 @@ public class ShowRunnerImpl implements ShowRunner {
         filename = args[0];
         LOG.info("File name: " + filename);
         try {
-            ArrayList<Frame> frames = fileParser.loadMatchFramesFromFile(filename);
+            /* *******************************************************************************************
+             *******************************************************************************************
+             * NEED TO HANDLE LAST FRAME FOR EACH PLAYER
+             * NEED TO CHECK IF THE NUMBER OF FRAMES FOR EACH PLAYER IS CORRECT
+             * *******************************************************************************************
+             * *******************************************************************************************
+             */
+            Map<String, List<Frame>> frames = fileParser.loadMatchFramesFromFile(filename);
+            System.out.println("TESTE");
         } catch (NotFoundException e) {
             LOG.error(e.getMessage());
-        } catch(FileWrongFormatException e) {
+        } catch (FileWrongFormatException e) {
             LOG.error(e.getMessage());
         }
     }

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Frame {
-    private Player player;
+    private String playerName;
 
     private Integer pinFallsFirstRound;
 
@@ -19,4 +19,8 @@ public class Frame {
     private Boolean isStrike;
 
     private Boolean isSpare;
+
+    private Integer score;
+
+    private Boolean isLastFrame;
 }
