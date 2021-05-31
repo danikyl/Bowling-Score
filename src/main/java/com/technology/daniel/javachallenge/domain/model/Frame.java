@@ -12,11 +12,11 @@ import lombok.NoArgsConstructor;
 public class Frame {
     private String playerName;
 
-    private Integer pinFallsFirstRound;
+    private String pinFallsFirstRound;
 
-    private Integer pinFallsSecondRound;
+    private String pinFallsSecondRound;
 
-    private Integer pinFallsThirdRound;
+    private String pinFallsThirdRound;
 
     private Boolean isStrike;
 
@@ -25,4 +25,21 @@ public class Frame {
     private Integer score;
 
     private Boolean isLastFrame;
+
+    private Integer faultOnRound;
+
+    public Integer getPinFallsFirstRoundInteger() {
+        if (pinFallsFirstRound.equals("F")) return 0;
+        return Integer.parseInt(pinFallsFirstRound);
+    }
+
+    public Integer getPinFallsSecondRoundInteger() {
+        if (pinFallsSecondRound.equals("F")) return 0;
+        return Integer.parseInt(pinFallsSecondRound);
+    }
+
+    public Integer getPinFallsThirdRoundInteger() {
+        if (pinFallsThirdRound.equals("F")) return 0;
+        return Integer.parseInt(pinFallsThirdRound);
+    }
 }

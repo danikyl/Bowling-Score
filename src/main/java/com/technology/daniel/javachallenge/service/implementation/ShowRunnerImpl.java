@@ -39,19 +39,13 @@ public class ShowRunnerImpl implements ShowRunner {
         filename = args[0];
         LOG.info("File name: " + filename);
         try {
-            /* *******************************************************************************************
-             *******************************************************************************************
-             * NEED TO HANDLE LAST FRAME FOR EACH PLAYER
-             * NEED TO CHECK IF THE NUMBER OF FRAMES FOR EACH PLAYER IS CORRECT
-             * *******************************************************************************************
-             * *******************************************************************************************
-             */
             List<Frame> frames = fileParser.loadMatchFramesFromFile(filename);
-
 
             Map<String, List<Frame>> framesByPlayer = scoreService.divideMatchFramesPerPlayer(frames);
 
             scoreService.generateScore(framesByPlayer);
+
+            scoreService.printMatchScore(framesByPlayer);
 
 
         } catch (NotFoundException e) {
