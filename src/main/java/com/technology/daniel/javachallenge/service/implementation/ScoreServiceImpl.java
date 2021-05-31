@@ -15,7 +15,6 @@ public class ScoreServiceImpl implements ScoreService {
     @Override
     public Map<String, List<Frame>> divideMatchFramesPerPlayer(List<Frame> matchFrames) {
         Map<String, List<Frame>> framesMap = matchFrames.stream().collect(Collectors.groupingBy(frame -> frame.getPlayerName()));
-        ;
         return framesMap;
     }
 
@@ -82,7 +81,7 @@ public class ScoreServiceImpl implements ScoreService {
     }
 
     private String convertFrameScore(Frame frame) {
-        return frame.getScore()+"\t\t";
+        return frame.getScore() + "\t\t";
     }
 
     private String convertNumberToBowlingSymbol(String number) {
@@ -129,6 +128,7 @@ public class ScoreServiceImpl implements ScoreService {
             currentFrame.setScore(framePoints);
         }
     }
+
     private Integer validatePinFalls(Integer pinFalls) {
         if (pinFalls < 0 || pinFalls > 10) {
             throw new FileWrongFormatException("Provided play is not valid.");

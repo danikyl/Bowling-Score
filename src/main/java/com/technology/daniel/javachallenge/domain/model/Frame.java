@@ -45,6 +45,7 @@ public class Frame {
         }
         return false;
     }
+
     public Boolean isFrameSpare() {
         if (this.getPinFallsFirstRoundInteger() != 10 && this.getPinFallsFirstRoundInteger() + this.getPinFallsSecondRoundInteger() == 10) {
             return true;
