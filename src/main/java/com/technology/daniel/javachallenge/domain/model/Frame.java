@@ -18,10 +18,6 @@ public class Frame {
 
     private String pinFallsThirdRound;
 
-    private Boolean isStrike;
-
-    private Boolean isSpare;
-
     private Integer score;
 
     private Boolean isLastFrame;
@@ -41,5 +37,18 @@ public class Frame {
     public Integer getPinFallsThirdRoundInteger() {
         if (pinFallsThirdRound.equals("F")) return 0;
         return Integer.parseInt(pinFallsThirdRound);
+    }
+
+    public Boolean isFrameStrike() {
+        if (this.getPinFallsFirstRoundInteger() == 10) {
+            return true;
+        }
+        return false;
+    }
+    public Boolean isFrameSpare() {
+        if (this.getPinFallsFirstRoundInteger() != 10 && this.getPinFallsFirstRoundInteger() + this.getPinFallsSecondRoundInteger() == 10) {
+            return true;
+        }
+        return false;
     }
 }

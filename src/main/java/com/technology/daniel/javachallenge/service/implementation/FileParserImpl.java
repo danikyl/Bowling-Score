@@ -36,7 +36,7 @@ public class FileParserImpl implements FileParser {
 
 
                 //Get first play of frame
-                String firstPinFalls = getNextRecordFromFile(reader, newFrame);
+                String firstPinFalls = getNextRecordFromFile(reader, newFrame, true);
                 newFrame.setPinFallsFirstRound(firstPinFalls);
 
                 //Check if player is already present on counter map
@@ -50,16 +50,16 @@ public class FileParserImpl implements FileParser {
                 //STRIKE CASE
                 if (!firstPinFalls.equals("10") || playersFrameCount.get(newFrame.getPlayerName()) == 10) {
                     //Get second play of frame
-                    String secondPinFalls = getNextRecordFromFile(reader, newFrame);
+                    String secondPinFalls = getNextRecordFromFile(reader, newFrame, false);
                     newFrame.setPinFallsSecondRound(secondPinFalls);
                 }
 
                 //CASE OF PLAYER'S LAST FRAME
                 if (playersFrameCount.get(newFrame.getPlayerName()) == 10) {
                     newFrame.setIsLastFrame(true);
-                    if (isFrameSpare(newFrame) || isFrameStrike(newFrame)) {
+                    if (newFrame.isFrameSpare() || newFrame.isFrameStrike()) {
                         //Get third play of frame
-                        String thirdPinFalls = getNextRecordFromFile(reader, newFrame);
+                        String thirdPinFalls = getNextRecordFromFile(reader, newFrame, false);
                         newFrame.setPinFallsThirdRound(thirdPinFalls);
                     }
                 }
@@ -74,40 +74,14 @@ public class FileParserImpl implements FileParser {
         }
     }
 
-    private String getNextRecordFromFile(Scanner reader, Frame newFrame) {
+    private String getNextRecordFromFile(Scanner reader, Frame newFrame, Boolean setPlayerName) {
         String row;
         String[] ballPlayInfo;
         row = reader.nextLine();
         ballPlayInfo = row.split("\t");
-        validatePlayerName(newFrame, ballPlayInfo[0]);
-        return validatePinFalls(ballPlayInfo[1]);
-    }
-
-    private String validatePinFalls(String pinFalls) {
-        if (!pinFalls.equals("F") && (Integer.parseInt(pinFalls) < 0 || Integer.parseInt(pinFalls) > 10)) {
-            throw new FileWrongFormatException("Provided play is not valid.");
+        if (setPlayerName) {
+            newFrame.setPlayerName(ballPlayInfo[0]);
         }
-        return pinFalls;
-    }
-
-    private Boolean isFrameSpare(Frame frame) {
-        if (Integer.parseInt(frame.getPinFallsFirstRound()) + Integer.parseInt(frame.getPinFallsSecondRound()) == 10) {
-            return true;
-        }
-        return false;
-    }
-
-    private Boolean isFrameStrike(Frame frame) {
-        if (frame.getPinFallsFirstRound().equals("10")) {
-            return true;
-        }
-        return false;
-    }
-
-    private void validatePlayerName(Frame frame, String playerName) {
-        if (frame.getPlayerName() == null) {
-            frame.setPlayerName(playerName);
-        } else if (!frame.getPlayerName().equals(playerName))
-            throw new FileWrongFormatException("Player name of first and second play doesn't match");
+        return ballPlayInfo[1];
     }
 }
