@@ -45,7 +45,7 @@ java -jar target/java-challenge-0.0.1-SNAPSHOT.jar ./src/test/resources/positive
 ``` 
 If you check the project root folder, you will now find the outputfile.csv there containing the match results.
 
-![Result File Example](https://imgur.com/vspYA7S)
+![Result File Example](https://i.imgur.com/vspYA7S.png)
 
 ## Authors
 
