@@ -41,8 +41,7 @@ You can also specify a output file for the java program. If you do so, the match
 So let's run the application. In the project root folder run: 
 
 ```
-cd target
-java -jar java-challenge-0.0.1-SNAPSHOT.jar src/test/resources/positive/scores.txt > outputfile.csv
+java -jar target/java-challenge-0.0.1-SNAPSHOT.jar ./src/test/resources/positive/scores.txt > outputfile.csv
 ``` 
 If you check the target folder, you will now find the outputfile.csv there containing the match results.
 
