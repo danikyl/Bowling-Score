@@ -43,7 +43,7 @@ So let's run the application. In the project root folder run:
 ```
 java -jar target/java-challenge-0.0.1-SNAPSHOT.jar ./src/test/resources/positive/scores.txt > outputfile.csv
 ``` 
-If you check the target folder, you will now find the outputfile.csv there containing the match results.
+If you check the project root folder, you will now find the outputfile.csv there containing the match results.
 
 ## Authors
 
