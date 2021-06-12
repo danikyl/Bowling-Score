@@ -1,4 +1,4 @@
-# JavaChallenge
+# Bowling Score
 
 This project has the primary goal to read a file containing bowling plays, calculate the match score and print the results to stdout.
 
