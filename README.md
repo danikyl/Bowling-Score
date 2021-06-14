@@ -19,8 +19,8 @@ Maven installed and added to command line
 
 
 ```
-git clone https://git.jobsity.com/daniel.fucci/JavaChallenge.git
-cd JavaChallenge
+git clone https://github.com/danikyl/Bowling-Score.git
+cd 'Bowling-Score'
 ``` 
 
 ### Running tests
