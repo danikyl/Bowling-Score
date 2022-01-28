@@ -1,8 +1,8 @@
-package com.technology.daniel.javachallenge.service.implementation;
+package com.technology.daniel.bowlingscore.service.implementation;
 
-import com.technology.daniel.javachallenge.domain.model.Frame;
-import com.technology.daniel.javachallenge.exception.FileWrongFormatException;
-import com.technology.daniel.javachallenge.service.ScoreService;
+import com.technology.daniel.bowlingscore.domain.model.Frame;
+import com.technology.daniel.bowlingscore.exception.FileWrongFormatException;
+import com.technology.daniel.bowlingscore.service.ScoreService;
 import org.springframework.stereotype.Service;
 
 import java.util.Iterator;

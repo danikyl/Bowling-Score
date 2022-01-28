@@ -1,8 +1,8 @@
-package com.technology.daniel.javachallenge.service;
+package com.technology.daniel.bowlingscore.service;
 
-import com.technology.daniel.javachallenge.domain.model.Frame;
-import com.technology.daniel.javachallenge.exception.FileWrongFormatException;
-import com.technology.daniel.javachallenge.service.implementation.FileParserImpl;
+import com.technology.daniel.bowlingscore.domain.model.Frame;
+import com.technology.daniel.bowlingscore.exception.FileWrongFormatException;
+import com.technology.daniel.bowlingscore.service.implementation.FileParserImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

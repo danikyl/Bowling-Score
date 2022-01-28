@@ -1,10 +1,10 @@
-package com.technology.daniel.javachallenge;
+package com.technology.daniel.bowlingscore;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class JavaChallengeApplicationTests {
+class BowlingScoreApplicationTest {
 
     @Test
     void contextLoads() {

@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.technology.daniel</groupId>
-    <artifactId>java-challenge</artifactId>
+    <artifactId>bowling-score</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>java-challenge</name>
-    <description>Java Challenge</description>
+    <name>bowling-score</name>
+    <description>Bowling Score</description>
     <properties>
         <java.version>11</java.version>
     </properties>

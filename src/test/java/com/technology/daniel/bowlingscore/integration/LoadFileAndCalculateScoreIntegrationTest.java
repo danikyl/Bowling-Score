@@ -1,10 +1,10 @@
-package com.technology.daniel.javachallenge.integration;
+package com.technology.daniel.bowlingscore.integration;
 
-import com.technology.daniel.javachallenge.domain.model.Frame;
-import com.technology.daniel.javachallenge.service.FileParser;
-import com.technology.daniel.javachallenge.service.ScoreService;
-import com.technology.daniel.javachallenge.service.implementation.FileParserImpl;
-import com.technology.daniel.javachallenge.service.implementation.ScoreServiceImpl;
+import com.technology.daniel.bowlingscore.domain.model.Frame;
+import com.technology.daniel.bowlingscore.service.FileParser;
+import com.technology.daniel.bowlingscore.service.ScoreService;
+import com.technology.daniel.bowlingscore.service.implementation.FileParserImpl;
+import com.technology.daniel.bowlingscore.service.implementation.ScoreServiceImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

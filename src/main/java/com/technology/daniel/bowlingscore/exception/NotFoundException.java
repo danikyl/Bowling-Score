@@ -1,4 +1,4 @@
-package com.technology.daniel.javachallenge.exception;
+package com.technology.daniel.bowlingscore.exception;
 
 public class NotFoundException extends RuntimeException {
 

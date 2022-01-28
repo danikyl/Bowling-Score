@@ -1,4 +1,4 @@
-package com.technology.daniel.javachallenge.domain.model;
+package com.technology.daniel.bowlingscore.domain.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

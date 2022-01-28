@@ -1,12 +1,12 @@
-package com.technology.daniel.javachallenge.service.implementation;
+package com.technology.daniel.bowlingscore.service.implementation;
 
-import com.technology.daniel.javachallenge.JavaChallengeApplication;
-import com.technology.daniel.javachallenge.domain.model.Frame;
-import com.technology.daniel.javachallenge.exception.FileWrongFormatException;
-import com.technology.daniel.javachallenge.exception.NotFoundException;
-import com.technology.daniel.javachallenge.service.FileParser;
-import com.technology.daniel.javachallenge.service.ScoreService;
-import com.technology.daniel.javachallenge.service.ShowRunner;
+import com.technology.daniel.bowlingscore.BowlingScoreApplication;
+import com.technology.daniel.bowlingscore.domain.model.Frame;
+import com.technology.daniel.bowlingscore.exception.FileWrongFormatException;
+import com.technology.daniel.bowlingscore.exception.NotFoundException;
+import com.technology.daniel.bowlingscore.service.FileParser;
+import com.technology.daniel.bowlingscore.service.ScoreService;
+import com.technology.daniel.bowlingscore.service.ShowRunner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.util.Map;
 public class ShowRunnerImpl implements ShowRunner {
 
     private static Logger LOG = LoggerFactory
-            .getLogger(JavaChallengeApplication.class);
+            .getLogger(BowlingScoreApplication.class);
 
     @Autowired
     FileParser fileParser;

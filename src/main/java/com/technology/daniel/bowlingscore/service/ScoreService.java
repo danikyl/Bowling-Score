@@ -1,6 +1,6 @@
-package com.technology.daniel.javachallenge.service;
+package com.technology.daniel.bowlingscore.service;
 
-import com.technology.daniel.javachallenge.domain.model.Frame;
+import com.technology.daniel.bowlingscore.domain.model.Frame;
 
 import java.util.List;
 import java.util.Map;

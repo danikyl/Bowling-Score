@@ -1,4 +1,4 @@
-package com.technology.daniel.javachallenge.service;
+package com.technology.daniel.bowlingscore.service;
 
 public interface ShowRunner {
     void run(String... args);

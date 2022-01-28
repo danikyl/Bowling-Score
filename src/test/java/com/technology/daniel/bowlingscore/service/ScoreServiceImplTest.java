@@ -1,7 +1,7 @@
-package com.technology.daniel.javachallenge.service;
+package com.technology.daniel.bowlingscore.service;
 
-import com.technology.daniel.javachallenge.domain.model.Frame;
-import com.technology.daniel.javachallenge.service.implementation.ScoreServiceImpl;
+import com.technology.daniel.bowlingscore.domain.model.Frame;
+import com.technology.daniel.bowlingscore.service.implementation.ScoreServiceImpl;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class ScoreServiceImplTest {
     }
 
     private Map<String, List<Frame>> generateOrdinaryMockFrameMap() {
-        Map<String,List<Frame>> frameMap = new HashMap<>();
+        Map<String, List<Frame>> frameMap = new HashMap<>();
 
         List<Frame> frameList1 = new ArrayList<>();
         frameList1.add(Frame.builder().playerName("John").pinFallsFirstRound("3").pinFallsSecondRound("7").isLastFrame(false).build());
@@ -63,7 +63,7 @@ public class ScoreServiceImplTest {
     }
 
     private Map<String, List<Frame>> generateAllZeroMockFrameMap() {
-        Map<String,List<Frame>> frameMap = new HashMap<>();
+        Map<String, List<Frame>> frameMap = new HashMap<>();
 
         List<Frame> frameList1 = new ArrayList<>();
         frameList1.add(Frame.builder().playerName("John").pinFallsFirstRound("0").pinFallsSecondRound("0").isLastFrame(false).build());
@@ -104,7 +104,7 @@ public class ScoreServiceImplTest {
     }
 
     private Map<String, List<Frame>> generateAllStrikeMockFrameMap() {
-        Map<String,List<Frame>> frameMap = new HashMap<>();
+        Map<String, List<Frame>> frameMap = new HashMap<>();
 
         List<Frame> frameList1 = new ArrayList<>();
         frameList1.add(Frame.builder().playerName("John").pinFallsFirstRound("10").isLastFrame(false).build());
