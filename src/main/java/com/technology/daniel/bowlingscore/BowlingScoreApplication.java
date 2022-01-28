@@ -1,16 +1,16 @@
 package com.technology.daniel.bowlingscore;
 
 import com.technology.daniel.bowlingscore.service.ShowRunner;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
+@RequiredArgsConstructor
 public class BowlingScoreApplication {
-    @Autowired
-    ShowRunner showRunner;
+    private final ShowRunner showRunner;
 
     private static Logger LOG = LoggerFactory
             .getLogger(BowlingScoreApplication.class);

@@ -13,7 +13,6 @@ import java.util.*;
 @Service
 public class FileParserImpl implements FileParser {
 
-    @Override
     public List<Frame> loadMatchFramesFromFile(String filename) {
         try {
             File fileToRead = new File(filename);

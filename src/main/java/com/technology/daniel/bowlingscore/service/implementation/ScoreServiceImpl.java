@@ -12,13 +12,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class ScoreServiceImpl implements ScoreService {
-    @Override
+
     public Map<String, List<Frame>> divideMatchFramesPerPlayer(List<Frame> matchFrames) {
         Map<String, List<Frame>> framesMap = matchFrames.stream().collect(Collectors.groupingBy(frame -> frame.getPlayerName()));
         return framesMap;
     }
 
-    @Override
     public Map<String, List<Frame>> generateScore(Map<String, List<Frame>> frameMap) {
         Iterator iterator = frameMap.entrySet().iterator();
 
@@ -30,7 +29,6 @@ public class ScoreServiceImpl implements ScoreService {
         return frameMap;
     }
 
-    @Override
     public void printMatchScore(Map<String, List<Frame>> frameMap) {
         printMatchHeader();
         Iterator iterator = frameMap.entrySet().iterator();

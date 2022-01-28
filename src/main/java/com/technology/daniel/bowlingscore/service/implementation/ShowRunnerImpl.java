@@ -7,27 +7,25 @@ import com.technology.daniel.bowlingscore.exception.NotFoundException;
 import com.technology.daniel.bowlingscore.service.FileParser;
 import com.technology.daniel.bowlingscore.service.ScoreService;
 import com.technology.daniel.bowlingscore.service.ShowRunner;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class ShowRunnerImpl implements ShowRunner {
 
     private static Logger LOG = LoggerFactory
             .getLogger(BowlingScoreApplication.class);
 
-    @Autowired
-    FileParser fileParser;
+    private final FileParser fileParser;
 
-    @Autowired
-    ScoreService scoreService;
+    private final ScoreService scoreService;
 
-    @Override
     public void run(String... args) {
         String filename;
         LOG.info("EXECUTING : command line runner");
