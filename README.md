@@ -44,7 +44,7 @@ file, but if you choose to not specify a output file, the results will be printe
 application. In the project root folder run:
 
 ```
-java -jar target/java-challenge-0.0.1-SNAPSHOT.jar ./src/test/resources/positive/scores.txt > outputfile.csv
+java -jar target/bowling-score-0.0.1-SNAPSHOT.jar ./src/test/resources/positive/scores.txt > outputfile.csv
 ``` 
 
 If you check the project root folder, you will now find the outputfile.csv there containing the match results.
